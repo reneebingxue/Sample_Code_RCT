@@ -1,22 +1,21 @@
 *********************************************************************
 * Author: Renee Li                                                  *
 * Date Created: 22 Januardy 2020                                    *
-* Date Edited: 22 January 2020   				                    *
-*												                    *
-* Purpose: ECON – UH – 1410J - PSET 3 ANALYSIS   		            * 
+* Date Edited: 22 January 2020   				    *
+* Purpose: ECON – UH – 1410J - PSET 3 ANALYSIS   		    * 
 * (0) Do File Set Up, Importing the initial dataset, Save it as .dta*
 * (1) Preliminary Data Cleaning                                     *
 * (2) Attrition Table And Basic Data Exploring for Context          *
-* (3) Merging my baseline data with the endline data                *
-* (4) Blance table Student presence, Baseline variable              *
-* (5) Main Effects Student presence, Primary outcomes V             *
+* (3) Merging baseline data with the endline data                   *
+* (4) Balance Table: Treatment & Baseline Characteristics           *
+* (5) Main Effects Student Presence, Primary Outcomes               *
 * (6) Heterogeneity Analysis                                        *   				
 * Version: Stata 15                                                 *
 * Data: simulateddata.dta                                           *
 *********************************************************************
 
-* (0) *********************Setup********************
-	  **********************************************
+* (0) *************Setup***************
+***************************************
 
 *** Clear memory
 	clear
@@ -34,7 +33,7 @@
 	cd "/Users/renee.li/Desktop/RENEE_FINAL_REPORT_ANALYSIS"
 
 ****************************************************
-* (1) Clean Baseline Data***************************                                                   *
+* (1) Clean Baseline Data***************************
 ****************************************************
 * Import excel data
 	import excel "RAW_DATA/jterm_2020_baseline.xls", sheet("Sheet1") firstrow
@@ -79,8 +78,7 @@
 
 	
 ******************* Exploring data for the context in Data*********************
-*2-1:(Any Exploration on the Data other than Main Analysis are displayed 	  *
-*in this seciotion)															  *
+*2-1:(Any Exploration on the Data other than Main Analysis are displayed in this seciotion)															  
 
 	count
 	count if BL_number_workers == 0
@@ -273,9 +271,6 @@
 	twoway (scatter default_amount student_pres) (lfit default_amount student_pres), ///
 	title("Defaulted Order Report Scatter")
 	graph export OUTPUT/Default_Amount_by_Treatment_Scatter.pdf, replace
-
-
-	
 *** To be continued with Heterogeniety*** 
  
 	*******************************************************************
@@ -352,11 +347,4 @@
 	reg total_abcd student_pres BusinessYoung bothY
 	outreg2 using "OUTPUT/FINAL.xls", append
 	
-	log close
-
-
-	
-	
-	
-	
-	
+	log close	
